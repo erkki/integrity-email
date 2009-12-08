@@ -13,12 +13,15 @@ module Integrity
       def initialize(commit, config={})
         @to     = config.delete("to")
         @from   = config.delete("from")
+        @notify_only_failures = config.delete("notify_only_failures")
         super(commit, config)
         configure_mailer
       end
 
       def deliver!
-        email.deliver!
+        if @notify_only_failures != '1' || (@notify_only_failures == '1' && commit.failed?)
+          email.deliver!
+        end
       end
 
       def email

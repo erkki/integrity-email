@@ -1,3 +1,8 @@
+%p.normal.checkbox
+  %label{ :for => "email_notifier_notify_only_failures" } Only failures?
+  %input.hidden{ :name => "notifiers[Email][notify_only_failures]", :value => "0", :type => "hidden" }
+  %input.checkbox#project_public{ checkbox("notifiers[Email][notify_only_failures]", config["notify_only_failures"] == '1') }
+
 %p.normal
   %label{ :for => "email_notifier_to" } Send to
   %input.text#email_notifier_to{ :name => "notifiers[Email][to]", :type => "text", :value => config["to"] }
